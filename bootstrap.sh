@@ -13,11 +13,11 @@
 # STEP 1. Change these values to your liking.
 
 PLUGIN_NAME="$(basename $(dirname $(realpath $0)))"  # name of current directory
-PLUGIN_TITLE='My ChRIS Plugin'
-SCRIPT_NAME='commandname'
-DESCRIPTION='A ChRIS plugin to do something awesome'
+PLUGIN_TITLE='Subdivide MINC Volume'
+SCRIPT_NAME='subdivide'
+DESCRIPTION='Use either nibabel or mincreshape to subdivide a volumetric image in the MINC file format.'
 ORGANIZATION='FNNDSC'
-EMAIL='dev@babyMRI.org'
+EMAIL='Jennings.Zhang@childrens.harvard.edu'
 
 # Github Actions: automatically test and build your code.
 # https://github.com/FNNDSC/python-chrisapp-template/wiki/Continuous-Integration
@@ -30,7 +30,7 @@ ENABLE_ACTIONS_BUILD=yes
 
 # STEP 2. Uncomment the line below.
 
-#READY=yes
+READY=yes
 
 # STEP 3. Run: ./bootstrap.sh
 
