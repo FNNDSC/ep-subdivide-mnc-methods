@@ -43,7 +43,7 @@ jobs:
       - name: Run pytest
         run: |
           docker run \
-            -v "$GITHUB_WORKSPACE:/app/examples:/examples:ro" \
+            -v "$GITHUB_WORKSPACE/examples:/examples:ro" \
             -v "$GITHUB_WORKSPACE:/app:ro" -w /app \
             localhost/fnndsc/ep-subdivide-mnc-methods:dev \
             pytest -o cache_dir=/tmp/pytest
