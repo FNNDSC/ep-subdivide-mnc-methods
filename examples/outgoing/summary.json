@@ -1,0 +1,22 @@
+{
+  "additions": {
+    "trilinear": 5881,
+    "tricubic": 6505,
+    "nearest_neighbour": 7292
+  },
+  "deletions": {
+    "trilinear": 6780,
+    "tricubic": 6788,
+    "nearest_neighbour": 7292
+  },
+  "total_changes": {
+    "trilinear": 12661,
+    "tricubic": 13293,
+    "nearest_neighbour": 14584
+  },
+  "mean_percent_change": {
+    "trilinear": -0.09759469696969697,
+    "tricubic": 0.006890782828282829,
+    "nearest_neighbour": 0.0
+  }
+}

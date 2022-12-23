@@ -1,174 +1,114 @@
-# _ChRIS_ Plugin Template
+# Subdivide MINC Volume
 
-[![test status](https://github.com/FNNDSC/python-chrisapp-template/actions/workflows/src.yml/badge.svg)](https://github.com/FNNDSC/python-chrisapp-template/actions/workflows/src.yml)
-[![MIT License](https://img.shields.io/github/license/FNNDSC/python-chrisapp-template)](LICENSE)
+[![Version](https://img.shields.io/docker/v/fnndsc/ep-subdivide-mnc-methods?sort=semver)](https://hub.docker.com/r/fnndsc/ep-subdivide-mnc-methods)
+[![MIT License](https://img.shields.io/github/license/fnndsc/ep-subdivide-mnc-methods)](https://github.com/FNNDSC/ep-subdivide-mnc-methods/blob/main/LICENSE)
+[![ci](https://github.com/FNNDSC/ep-subdivide-mnc-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/FNNDSC/ep-subdivide-mnc-methods/actions/workflows/ci.yml)
 
-This is a minimal template repository for _ChRIS_ plugin applications in Python.
+This repository contains several wrapper scripts for increasing the
+resolution of MINC volumes by subdividing voxels along their edges
+and performing interpolation.
 
-## About _ChRIS_ Plugins
-
-A _ChRIS_ plugin is a scientific data-processing software which can run anywhere all-the-same:
-in the cloud via a [web app](https://github.com/FNNDSC/ChRIS_ui/), or on your own laptop
-from the terminal. They are easy to build and easy to understand: most simply, a
-_ChRIS_ plugin is a command-line program which processes data from an input directory
-and creates data to an output directory with the usage
-`commandname [options...] inputdir/ outputdir/`.
-
-For more information, visit our website https://chrisproject.org
-
-## How to Use This Template
-
-Go to https://github.com/FNNDSC/python-chrisapp-template and click "Use this template".
-The newly created repository is ready to use right away.
-
-A script `bootstrap.sh` is provided to help fill in and rename values for your new project.
-It is optional to use.
-
-1. Edit the variables in `bootstrap.sh`
-2. Run `./bootstrap.sh`
-3. Follow the instructions it will print out
-
-## Example Plugins
-
-Here are some good, complete examples of _ChRIS_ plugins created from this template.
-
-- https://github.com/FNNDSC/pl-dcm2niix (basic command example)
-- https://github.com/FNNDSC/pl-mri-preview (uses [NiBabel](https://nipy.org/nibabel/))
-- https://github.com/FNNDSC/pl-fetal-cp-surface-extract (example using Python package project structure)
-
-## What's Inside
-
-| Path                       | Purpose                                                                                                                                                                                                  |
-|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `app.py`                   | Main script: start editing here!                                                                                                                                                                         |
-| `tests/`                   | Unit tests                                                                                                                                                                                               |
-| `setup.py`                 | [Python project metadata and installation script](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#setup-py)                                                        |
-| `requirements.txt`         | List of Python dependencies                                                                                                                                                                              |
-| `Dockerfile`               | [Container image build recipe](https://docs.docker.com/engine/reference/builder/)                                                                                                                        |
-| `.github/workflows/ci.yml` | "continuous integration" using [Github Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions): automatic testing, building, and uploads to https://chrisstore.co |
-
-## Contributing
-
-The source code for the `main` branch of this repository is on the
-[src](https://github.com/fnndsc/python-chrisapp-template/tree/src)
-branch, which has an additional file
-[`.github/workflows/src.yml`](https://github.com/FNNDSC/python-chrisapp-template/blob/src/.github/workflows/src.yml)
-When tests pass, changes are automatically merged into `main`.
-Developers should commit to or make pull requests targeting `src`.
-Do not push directly to `main`.
-
-This is a workaround in order to do automatic testing of this template
-without including the `.github/workflows/src.yml` file in the template itself.
-
-<!-- BEGIN README TEMPLATE
-
-# ChRIS Plugin Title
-
-[![Version](https://img.shields.io/docker/v/fnndsc/pl-appname?sort=semver)](https://hub.docker.com/r/fnndsc/pl-appname)
-[![MIT License](https://img.shields.io/github/license/fnndsc/pl-appname)](https://github.com/FNNDSC/pl-appname/blob/main/LICENSE)
-[![ci](https://github.com/FNNDSC/pl-appname/actions/workflows/ci.yml/badge.svg)](https://github.com/FNNDSC/pl-appname/actions/workflows/ci.yml)
-
-`pl-appname` is a [_ChRIS_](https://chrisproject.org/)
-_ds_ plugin which takes in ...  as input files and
-creates ... as output files.
-
-## Abstract
-
-...
+It can be ran as a _ChRIS_ *ds*-plugin, in which case it applies
+several methods of subdivision to every MINC file found in its
+input directory, writing outputs to a given output directory.
+These results are quantified and the aggragate statistics are
+written to `summary.json`.
 
 ## Installation
 
-`pl-appname` is a _[ChRIS](https://chrisproject.org/) plugin_, meaning it can
+`ep-subdivide-mnc-methods` is a _[ChRIS](https://chrisproject.org/) plugin_, meaning it can
 run from either within _ChRIS_ or the command-line.
 
-[![Get it from chrisstore.co](https://ipfs.babymri.org/ipfs/QmaQM9dUAYFjLVn3PpNTrpbKVavvSTxNLE5BocRCW1UoXG/light.png)](https://chrisstore.co/plugin/pl-appname)
+[![Get it from chrisstore.co](https://github.com/FNNDSC/ChRIS_store_ui/blob/22a8f9fa888ba1eefbebeed5ef42ae43e6562e28/src/assets/public/badges/light.png?raw=true)](https://chrisstore.co/plugin/ep-subdivide-mnc-methods)
 
-## Local Usage
+### Using Apptainer
 
 To get started with local command-line usage, use [Apptainer](https://apptainer.org/)
-(a.k.a. Singularity) to run `pl-appname` as a container:
+(a.k.a. Singularity) to run `ep-subdivide-mnc-methods` as a container:
 
 ```shell
-singularity exec docker://fnndsc/pl-appname commandname [--args values...] input/ output/
+singularity exec docker://fnndsc/ep-subdivide-mnc-methods subdivide [--args values...] input/ output/
 ```
 
 To print its available options, run:
 
 ```shell
-singularity exec docker://fnndsc/pl-appname commandname --help
+singularity exec docker://fnndsc/ep-subdivide-mnc-methods subdivide --help
 ```
 
-## Examples
+### Scripts
 
-`commandname` requires two positional arguments: a directory containing
-input data, and a directory where to create output data.
-First, create the input directory and move input data into it.
+#### `subdivide_minc.py`
+
+Wrapper around `mincresample` (part of [minc tools](https://bic-mni.github.io/)).
+
+##### Example of `subdivide_minc.py`
 
 ```shell
-mkdir incoming/ outgoing/
-mv some.dat other.dat incoming/
-singularity exec docker://fnndsc/pl-appname:latest commandname [--args] incoming/ outgoing/
+./subdivide_minc.py --divisions=8 input_volume.mnc output_subdivided_linear.mnc
+# or
+./subdivide_minc.py --divisions= --options=-cubic input_volume.mnc output_subdivided_cubic.mnc
 ```
+
+Flags can be passed directly to `mincresample` using `--options=...`. See
+[`man mincresample`](https://bic-mni.github.io/man-pages/man/mincresample.html)
+for options.
+
+##### Understanding Interpolation Options
+
+`mincresample` interpolates values along voxel boundaries to smoothen the output.
+The options are `-trilinear` (default for registration step in CIVET), `-tricubic`,
+`-nearest_neighbour`, and `-sinc`.
+
+###### External Reading
+
+- https://maidens.github.io/jekyll/update/2016/08/10/An-illustrated-guide-to-interpolation-methods.html
+- https://graphicdesign.stackexchange.com/questions/26385/difference-between-none-linear-cubic-and-sinclanczos3-interpolation-in-image
+
+###### Notes for Surface Extraction
+
+- nearest-neighbor has no blurring
+- sinc and cubic are similar
+- linear and cubic are smooth
+- linear might be preferable over cubic for surface extraction because tight fitting around voxels
+  is the cause of quality problem, not smoothness of mask edge
+
+#### `subdivide_nibabel.py`
+
+Increases the resolution of a volume without interpolation by computing the
+[Kronecker product](https://numpy.org/doc/stable/reference/generated/numpy.kron.html).
+
+##### Install dependencies for `subdivide_nibabel.py`
+
+```shell
+pip install numpy nibabel h5py
+# or
+conda install numpy nibabel h5py
+```
+
+Optional dependency on `nii2mnc` for output to MINC file format.
+
+##### Example of `subdivide_nibabel.py`
+
+```shell
+./subdivide_nibabel.py --divisions 4 input_volume.nii subdivided_output.nii
+```
+
+Both MINC and NIFTI file formats are supported.
 
 ## Development
 
 Instructions for developers.
 
-### Building
+### Local Testing
 
-Build a local container image:
-
-```shell
-docker build -t localhost/fnndsc/pl-appname .
-```
-
-### Running
-
-Mount the source code `app.py` into a container to try out changes without rebuild.
+Run tests using `pytest` inside a container.
 
 ```shell
-docker run --rm -it --userns=host -u $(id -u):$(id -g) \
-    -v $PWD/app.py:/usr/local/lib/python3.10/site-packages/app.py:ro \
-    -v $PWD/in:/incoming:ro -v $PWD/out:/outgoing:rw -w /outgoing \
-    localhost/fnndsc/pl-appname commandname /incoming /outgoing
+docker build -t localhost/fnndsc/ep-subdivide-mnc-methods:dev --build-arg extras_require=dev .
+docker run --rm -it -u "$(id -u):$(id -g)" \
+  -v "$PWD/examples:/examples:ro" \
+  -v "$PWD:/app:ro" -w /app \
+  localhost/fnndsc/ep-subdivide-mnc-methods:dev \
+  pytest -v -o cache_dir=/tmp/pytest
 ```
-
-### Testing
-
-Run unit tests using `pytest`.
-It's recommended to rebuild the image to ensure that sources are up-to-date.
-Use the option `--build-arg extras_require=dev` to install extra dependencies for testing.
-
-```shell
-docker build -t localhost/fnndsc/pl-appname:dev --build-arg extras_require=dev .
-docker run --rm -it localhost/fnndsc/pl-appname:dev pytest
-```
-
-## Release
-
-Steps for release can be automated by [Github Actions](.github/workflows/ci.yml).
-This section is about how to do those steps manually.
-
-### Increase Version Number
-
-Increase the version number in `setup.py` and commit this file.
-
-### Push Container Image
-
-Build and push an image tagged by the version. For example, for version `1.2.3`:
-
-```
-docker build -t docker.io/fnndsc/pl-appname:1.2.3 .
-docker push docker.io/fnndsc/pl-appname:1.2.3
-```
-
-### Get JSON Representation
-
-Run [`chris_plugin_info`](https://github.com/FNNDSC/chris_plugin#usage)
-to produce a JSON description of this plugin, which can be uploaded to a _ChRIS Store_.
-
-```shell
-docker run --rm localhost/fnndsc/pl-appname:dev chris_plugin_info > chris_plugin_info.json
-```
-
-END README TEMPLATE -->

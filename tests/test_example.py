@@ -1,21 +1,41 @@
+from typing import Iterable
+
+import pytest
+import json
 from pathlib import Path
 
-from app import parser, main
+from subdivide import parser, main
 
 
+@pytest.mark.skipif(not Path('/examples').is_dir(),
+                    reason='volume containing example data not mounted')
 def test_main(tmp_path: Path):
-    # setup example data
-    inputdir = tmp_path / 'incoming'
-    outputdir = tmp_path / 'outgoing'
-    inputdir.mkdir()
-    outputdir.mkdir()
-    (inputdir / 'plaintext.txt').write_text('hello ChRIS, I am a ChRIS plugin')
+    inputdir = Path('/examples/incoming')
+    expected = Path('/examples/outgoing')
 
     # simulate run of main function
-    options = parser.parse_args(['--word', 'ChRIS', '--pattern', '*.txt'])
-    main(options, inputdir, outputdir)
+    options = parser.parse_args([])
+    main(options, inputdir, tmp_path)
 
-    # assert behavior is expected
-    expected_output_file = outputdir / 'plaintext.count.txt'
-    assert expected_output_file.exists()
-    assert expected_output_file.read_text() == '2'
+    assert _rel(tmp_path) == _rel(expected)
+
+    summary_file = tmp_path / 'summary.json'
+    assert summary_file.is_file()
+    with summary_file.open('r') as f:
+        summary: dict = json.load(f)
+
+    expected_top_keys = {'additions', 'deletions', 'total_changes', 'mean_percent_change'}
+    expected_sub_keys = {'trilinear', 'tricubic', 'nearest_neighbour'}
+    assert set(summary.keys()) >= expected_top_keys
+    for key in expected_top_keys:
+        assert set(summary[key].keys()) == expected_sub_keys
+
+    assert 'count_inputs' in summary
+    assert type(summary['count_inputs']) is int
+
+
+def _rel(directory: Path) -> frozenset[Path]:
+    return frozenset(
+        filename.relative_to(directory)
+        for filename in directory.glob('**')
+    )

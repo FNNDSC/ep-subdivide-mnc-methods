@@ -19,18 +19,20 @@ def get_version(rel_path: str) -> str:
 
 
 setup(
-    name='chris-plugin-template',
-    version=get_version('app.py'),
-    description='A ChRIS DS plugin template',
-    author='FNNDSC',
-    author_email='dev@babyMRI.org',
-    url='https://github.com/FNNDSC/python-chrisapp-template',
-    py_modules=['app'],
-    install_requires=['chris_plugin'],
+    name='subdivide-mnc',
+    version=get_version('subdivide.py'),
+    description='Use either nibabel or mincreshape to subdivide a volumetric image in the MINC file format.',
+    author='Jennings Zhang',
+    author_email='Jennings.Zhang@childrens.harvard.edu',
+    url='https://github.com/FNNDSC/ep-subdivide-mnc-methods',
+    py_modules=['subdivide', 'subdivide_minc', 'subdivide_nibabel'],
+    install_requires=['chris_plugin==0.1.1', 'nibabel', 'numpy', 'h5py', 'loguru~=0.6.0'],
     license='MIT',
     entry_points={
         'console_scripts': [
-            'commandname = app:main'
+            'subdivide = subdivide:main',
+            'subdivide_minc = subdivide_minc:main',
+            'subdivide_nibabel = subdivide_nibabel:main'
         ]
     },
     classifiers=[
