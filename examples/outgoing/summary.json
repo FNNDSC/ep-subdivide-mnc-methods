@@ -1,22 +1,23 @@
 {
   "additions": {
-    "trilinear": 5881,
-    "tricubic": 6505,
-    "nearest_neighbour": 7292
+    "trilinear": 9188,
+    "tricubic": 9103,
+    "nearest_neighbour": 11595
   },
   "deletions": {
-    "trilinear": 6780,
-    "tricubic": 6788,
-    "nearest_neighbour": 7292
+    "trilinear": 7493,
+    "tricubic": 8532,
+    "nearest_neighbour": 11595
   },
   "total_changes": {
-    "trilinear": 12661,
-    "tricubic": 13293,
-    "nearest_neighbour": 14584
+    "trilinear": 16681,
+    "tricubic": 17635,
+    "nearest_neighbour": 23190
   },
   "mean_percent_change": {
-    "trilinear": -0.09759469696969697,
-    "tricubic": 0.006890782828282829,
+    "trilinear": -0.06299434953245188,
+    "tricubic": 0.008526695027294235,
     "nearest_neighbour": 0.0
-  }
+  },
+  "count_inputs": 3
 }
