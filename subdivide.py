@@ -35,7 +35,7 @@ parser = ArgumentParser(description='Subdivide voxels of a MINC volume using sev
                         formatter_class=ArgumentDefaultsHelpFormatter)
 parser.add_argument('-p', '--pattern', default='**/*.mnc', type=str,
                     help='input file glob')
-parser.add_argument('-d', '--divisions', default='2', type=int,
+parser.add_argument('-d', '--divisions', default=2, type=int,
                     help='number of cuts along voxel edge, valid values are powers of 2')
 parser.add_argument('-V', '--version', action='version',
                     version=f'%(prog)s {__version__}')
