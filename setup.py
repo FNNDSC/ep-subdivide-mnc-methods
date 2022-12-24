@@ -28,13 +28,17 @@ setup(
     py_modules=['subdivide', 'subdivide_minc', 'subdivide_nibabel'],
     install_requires=['chris_plugin==0.1.1', 'nibabel', 'numpy', 'h5py', 'loguru~=0.6.0'],
     license='MIT',
+    # multiple console_scripts not supported
+    # https://github.com/FNNDSC/chris_plugin/issues/4
     entry_points={
         'console_scripts': [
             'subdivide = subdivide:main',
-            'subdivide_minc = subdivide_minc:main',
-            'subdivide_nibabel = subdivide_nibabel:main'
         ]
     },
+    scripts=[
+        'subdivide_minc.py',
+        'subdivide_nibabel.py'
+    ],
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Topic :: Scientific/Engineering',
