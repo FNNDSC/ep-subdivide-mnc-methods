@@ -31,11 +31,11 @@ def test_main(tmp_path: Path):
         assert set(summary[key].keys()) == expected_sub_keys
 
     assert 'count_inputs' in summary
-    assert type(summary['count_inputs']) is int
+    assert summary['count_inputs'] == len(list(inputdir.rglob('*.mnc')))
 
 
 def _rel(directory: Path) -> frozenset[Path]:
     return frozenset(
         filename.relative_to(directory)
-        for filename in directory.glob('**')
+        for filename in directory.rglob('*')
     )

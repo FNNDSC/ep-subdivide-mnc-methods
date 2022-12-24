@@ -84,7 +84,7 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
         'deletions': {k: sum(d.deletions for d in v) for k, v in diffs.items()},
         'total_changes': {k: sum(d.count_changes for d in v) for k, v in diffs.items()},
         'mean_percent_change': {k: np.mean([d.percent_change for d in v]) for k, v in diffs.items()},
-        'count_inputs': len(diffs)
+        'count_inputs': mapper.count()
     }
     summary_file = outputdir / 'summary.json'
     with summary_file.open('w') as out:
