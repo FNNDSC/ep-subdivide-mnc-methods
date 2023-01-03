@@ -14,10 +14,19 @@
     "tricubic": 17635,
     "nearest_neighbour": 23190
   },
-  "mean_percent_change": {
-    "trilinear": -0.06299434953245188,
-    "tricubic": 0.008526695027294235,
-    "nearest_neighbour": 0.0
+  "percent_change": {
+    "trilinear": {
+      "mean": -0.06299434953245188,
+      "std": 0.07019962897597562
+    },
+    "tricubic": {
+      "mean": 0.008526695027294234,
+      "std": 0.02849224457220062
+    },
+    "nearest_neighbour": {
+      "mean": 0.0,
+      "std": 0.0
+    }
   },
-  "count_inputs": 3
+  "count_inputs": 4
 }

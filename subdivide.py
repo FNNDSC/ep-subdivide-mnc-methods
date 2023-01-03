@@ -83,13 +83,24 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
         'additions': {k: sum(d.additions for d in v) for k, v in diffs.items()},
         'deletions': {k: sum(d.deletions for d in v) for k, v in diffs.items()},
         'total_changes': {k: sum(d.count_changes for d in v) for k, v in diffs.items()},
-        'mean_percent_change': {k: np.mean([d.percent_change for d in v]) for k, v in diffs.items()},
+        'percent_change': {
+            k: {
+                'mean': np.mean([d.percent_change for d in v]),
+                'std': np.std([d.percent_change for d in v])
+            }
+            for k, v in diffs.items()
+        },
         'count_inputs': mapper.count()
     }
     summary_file = outputdir / 'summary.json'
     with summary_file.open('w') as out:
         json.dump(summary, out, indent=2)
     logger.info('written to {}', summary_file)
+
+    # TODO
+    # double histograms:
+    # kron v.s. interpolated total voxel count
+    # kron v.s. interpolated percent_change
 
 
 class LazyCall:

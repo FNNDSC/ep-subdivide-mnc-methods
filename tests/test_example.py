@@ -24,11 +24,14 @@ def test_main(tmp_path: Path):
     with summary_file.open('r') as f:
         summary: dict = json.load(f)
 
-    expected_top_keys = {'additions', 'deletions', 'total_changes', 'mean_percent_change'}
+    expected_top_keys = {'additions', 'deletions', 'total_changes', 'percent_change'}
     expected_sub_keys = {'trilinear', 'tricubic', 'nearest_neighbour'}
     assert set(summary.keys()) >= expected_top_keys
     for key in expected_top_keys:
         assert set(summary[key].keys()) == expected_sub_keys
+
+    for v in summary['percent_change'].values():
+        assert {'mean', 'std'} == set(v.keys())
 
     assert 'count_inputs' in summary
     assert summary['count_inputs'] == len(list(inputdir.rglob('*.mnc')))
