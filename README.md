@@ -4,6 +4,9 @@
 [![MIT License](https://img.shields.io/github/license/fnndsc/ep-subdivide-mnc-methods)](https://github.com/FNNDSC/ep-subdivide-mnc-methods/blob/main/LICENSE)
 [![ci](https://github.com/FNNDSC/ep-subdivide-mnc-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/FNNDSC/ep-subdivide-mnc-methods/actions/workflows/ci.yml)
 
+![Screenshot of cube](examples/img/cube.png)
+![Screenshot of ball](examples/img/ball.png)
+
 This repository contains several wrapper scripts for increasing the
 resolution of MINC volumes by subdividing voxels along their edges
 and performing interpolation.
