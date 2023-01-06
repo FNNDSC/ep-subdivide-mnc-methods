@@ -43,7 +43,7 @@ class MincFile:
 
 
 def resample(input_file: Union[str, os.PathLike], output_file: Union[str, os.PathLike], divisions: float,
-             verbose: bool = False, options: Optional[Sequence[str]] = None) -> int:
+             verbose: bool = False, options: Optional[Sequence[str]] = None) -> None:
     """
     Wrapper for ``mincresample``.
     """
@@ -59,8 +59,7 @@ def resample(input_file: Union[str, os.PathLike], output_file: Union[str, os.Pat
         input_file,
         output_file
     ]
-    proc = sp.run(cmd)
-    return proc.returncode
+    sp.run(cmd, check=True)
 
 
 def ssv_str(s: str) -> List[str]:
@@ -84,8 +83,10 @@ def main():
     parser.add_argument('output', type=str, help='output file')
 
     options = parser.parse_args()
-    rc = resample(options.input, options.output, options.divisions, options.verbose, options.options)
-    sys.exit(rc)
+    try:
+        resample(options.input, options.output, options.divisions, options.verbose, options.options)
+    except sp.CalledProcessError as e:
+        sys.exit(e.returncode)
 
 
 if __name__ == '__main__':

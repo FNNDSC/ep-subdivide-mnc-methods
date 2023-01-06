@@ -1,0 +1,10 @@
+{
+  "additions": 5227,
+  "deletions": 5880,
+  "total": 9600,
+  "method": "trilinear",
+  "path": "examples/outgoing/square_prism.subdiv.2.mt.trilinear.mnc",
+  "change": -653,
+  "count_changes": 11107,
+  "percent_change": -0.06802083333333334
+}

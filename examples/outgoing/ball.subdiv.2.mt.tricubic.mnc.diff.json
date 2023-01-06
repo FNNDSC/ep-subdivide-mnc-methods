@@ -1,0 +1,10 @@
+{
+  "additions": 2598,
+  "deletions": 1744,
+  "total": 45171,
+  "method": "tricubic",
+  "path": "examples/outgoing/ball.subdiv.2.mt.tricubic.mnc",
+  "change": 854,
+  "count_changes": 4342,
+  "percent_change": 0.018905935223926855
+}

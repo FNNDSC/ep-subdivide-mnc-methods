@@ -1,0 +1,10 @@
+{
+  "additions": 319,
+  "deletions": 414,
+  "total": 1408,
+  "method": "trilinear",
+  "path": "examples/outgoing/cube.subdiv.2.mt.trilinear.mnc",
+  "change": -95,
+  "count_changes": 733,
+  "percent_change": -0.06747159090909091
+}

@@ -1,0 +1,10 @@
+{
+  "additions": 335,
+  "deletions": 486,
+  "total": 960,
+  "method": "trilinear",
+  "path": "examples/outgoing/pyramid.subdiv.2.mt.trilinear.mnc",
+  "change": -151,
+  "count_changes": 821,
+  "percent_change": -0.15729166666666666
+}

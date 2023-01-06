@@ -1,0 +1,10 @@
+{
+  "additions": 3307,
+  "deletions": 713,
+  "total": 66264,
+  "method": "trilinear",
+  "path": "examples/outgoing/ball.subdiv.2.mt.trilinear.mnc",
+  "change": 2594,
+  "count_changes": 4020,
+  "percent_change": 0.03914644452493058
+}

@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.authors="FNNDSC <dev@babyMRI.org>" \
 
 WORKDIR /usr/local/src/ep-subdivide-mnc-methods
 
-RUN conda install -c conda-forge numpy=1.23.5 nibabel=4.0.2 h5py=3.7.0
+RUN conda install -c conda-forge numpy=1.23.5 nibabel=4.0.2 h5py=3.7.0 seaborn=0.12.2 pandas=1.5.2
 
 COPY . .
 ARG extras_require=none

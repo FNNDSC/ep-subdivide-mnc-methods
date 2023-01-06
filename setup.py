@@ -20,19 +20,20 @@ def get_version(rel_path: str) -> str:
 
 setup(
     name='subdivide-mnc',
-    version=get_version('subdivide.py'),
+    version=get_version('subdivide/__init__.py'),
     description='Use either nibabel or mincreshape to subdivide a volumetric image in the MINC file format.',
     author='Jennings Zhang',
     author_email='Jennings.Zhang@childrens.harvard.edu',
     url='https://github.com/FNNDSC/ep-subdivide-mnc-methods',
-    py_modules=['subdivide', 'subdivide_minc', 'subdivide_nibabel'],
-    install_requires=['chris_plugin==0.1.1', 'nibabel', 'numpy', 'h5py', 'loguru~=0.6.0'],
+    packages=['subdivide'],
+    py_modules=['subdivide_minc', 'subdivide_nibabel'],
+    install_requires=['chris_plugin==0.1.1', 'nibabel', 'numpy', 'seaborn', 'pandas', 'h5py', 'loguru~=0.6.0'],
     license='MIT',
     # multiple console_scripts not supported
     # https://github.com/FNNDSC/chris_plugin/issues/4
     entry_points={
         'console_scripts': [
-            'subdivide = subdivide:main',
+            'subdivide = subdivide.__main__:main',
         ]
     },
     scripts=[
