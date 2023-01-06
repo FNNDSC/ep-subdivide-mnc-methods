@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Callable, Sequence, TypeVar, Generic, Optional
 
 import pandas as pd
+import seaborn as sns
 from chris_plugin import chris_plugin, PathMapper
 from loguru import logger
 
@@ -72,10 +73,8 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
         json.dump(summary, out, indent=2)
     logger.info('summary written to --> {}', summary_file)
 
-    # TODO
-    # double histograms:
-    # kron v.s. interpolated total voxel count
-    # kron v.s. interpolated percent_change
+    _draw_figures(df, outputdir / 'figures')
+    logger.info('Created figures.')
 
 
 class LazyCall(Generic[T], Callable[[], T]):
@@ -150,3 +149,11 @@ def _report_voldiff(other_path: Path) -> VolDiff:
     elapsed = f'{(end_ns - start_ns) / 1e9:.1f}s'
     logger.info('counted voxel difference: {} -> {} (took {})', other_path, report_path, elapsed)
     return diff
+
+
+def _draw_figures(df: pd.DataFrame, output_dir: Path):
+    output_dir.mkdir()
+    plot = sns.kdeplot(df, x='percent_change', hue='method')
+    plot.figure.savefig(output_dir / 'kdeplot_percent_change.png')
+    plot = sns.kdeplot(df, x='total', hue='method')
+    plot.figure.savefig(output_dir / 'kdeplot_total_voxel_count.png')
