@@ -7,12 +7,12 @@
   "deletions": {
     "nearest_neighbour": 11595,
     "tricubic": 8532,
-    "trilinear": 7493
+    "trilinear": 7663
   },
   "count_changes": {
     "nearest_neighbour": 23190,
     "tricubic": 17635,
-    "trilinear": 16681
+    "trilinear": 16851
   },
   "count_inputs": 12,
   "percent_change": {
@@ -25,8 +25,8 @@
       "std": 0.033283581606611004
     },
     "trilinear": {
-      "mean": -0.06340941159604008,
-      "std": 0.08035203368731451
+      "mean": -0.06405078549438609,
+      "std": 0.07926342385758933
     }
   }
 }

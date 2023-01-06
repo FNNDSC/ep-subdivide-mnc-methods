@@ -8,6 +8,6 @@ additions,deletions,total,method,path,change,count_changes,percent_change
 5227,5880,9600,trilinear,examples/outgoing/square_prism.subdiv.2.mt.trilinear.mnc,-653,11107,-0.06802083333333334
 5523,5880,9600,tricubic,examples/outgoing/square_prism.subdiv.2.mt.tricubic.mnc,-357,11403,-0.0371875
 6160,6160,9600,nearest_neighbour,examples/outgoing/square_prism.subdiv.2.mt.nearest_neighbour.mnc,0,12320,0.0
-3307,713,66264,trilinear,examples/outgoing/ball.subdiv.2.mt.trilinear.mnc,2594,4020,0.03914644452493058
+3307,883,66264,trilinear,examples/outgoing/ball.subdiv.2.mt.trilinear.mnc,2424,4190,0.03658094893154654
 2598,1744,45171,tricubic,examples/outgoing/ball.subdiv.2.mt.tricubic.mnc,854,4342,0.018905935223926855
 4303,4303,63568,nearest_neighbour,examples/outgoing/ball.subdiv.2.mt.nearest_neighbour.mnc,0,8606,0.0

@@ -28,17 +28,12 @@ class VolDiff(TypedDict):
 def _count_3d_diff(a: npt.NDArray, b: npt.NDArray) -> tuple[int, int]:
     if not a.shape == b.shape:
         b = b.reshape(a.shape)
-    max_x, max_y, max_z = a.shape
-    additions = 0
-    deletions = 0
-    for x in range(max_x):
-        for y in range(max_y):
-            for z in range(max_z):
-                if a[x, y, z] > 0.5 > b[x, y, z]:
-                    deletions += 1
-                elif a[x, y, z] < 0.5 < b[x, y, z]:
-                    additions += 1
-    return additions, deletions
+
+    diff = a - b
+    additions = (diff < -0.5).sum()
+    deletions = (diff > +0.5).sum()
+
+    return int(additions), int(deletions)
 
 
 def _method_of(p: Path) -> InterpolationOption:
