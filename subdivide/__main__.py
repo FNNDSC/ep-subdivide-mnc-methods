@@ -109,7 +109,7 @@ def __jobs4files(t: tuple[Path, Path], divisions: int) -> Sequence[Callable[[], 
 
 
 def __mincresample_wrapper(input_file: Path, output_file: Path, divisions: int, interpolation_option: str) -> Path:
-    mincresample(input_file, output_file, divisions, options=['-' + interpolation_option])
+    mincresample(input_file, output_file, divisions, binarize=True, verbose=False, options=['-' + interpolation_option])
     return output_file
 
 

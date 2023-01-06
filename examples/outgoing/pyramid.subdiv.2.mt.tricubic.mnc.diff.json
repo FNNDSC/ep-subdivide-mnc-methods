@@ -1,10 +1,10 @@
 {
   "additions": 510,
-  "deletions": 494,
-  "total": 960,
+  "deletions": 582,
+  "total": 888,
   "method": "tricubic",
   "path": "examples/outgoing/pyramid.subdiv.2.mt.tricubic.mnc",
-  "change": 16,
-  "count_changes": 1004,
-  "percent_change": 0.016666666666666666
+  "change": -72,
+  "count_changes": 1092,
+  "percent_change": -0.08108108108108109
 }

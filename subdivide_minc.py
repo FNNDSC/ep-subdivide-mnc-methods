@@ -43,14 +43,16 @@ class MincFile:
 
 
 def resample(input_file: Union[str, os.PathLike], output_file: Union[str, os.PathLike], divisions: float,
+             binarize: bool = True,
              verbose: bool = False, options: Optional[Sequence[str]] = None) -> None:
     """
     Wrapper for ``mincresample``.
     """
     info = MincFile(input_file).mincinfo()
+    quiet_flag = [] if verbose else ['-quiet']
     cmd = [
         'mincresample',
-        *([] if verbose else ['-quiet']),
+        *quiet_flag,
         '-nelements',
         *(str(int(divisions * l)) for l in info.length),
         '-step',
@@ -60,6 +62,12 @@ def resample(input_file: Union[str, os.PathLike], output_file: Union[str, os.Pat
         output_file
     ]
     sp.run(cmd, check=True)
+
+    if binarize:
+        tmp = str(output_file) + '.binarized.mnc'
+        cmd = ['minccalc', *quiet_flag, '-unsigned', '-byte', '-expression', 'A[0]>0.5', output_file, tmp]
+        sp.run(cmd, check=True)
+        os.rename(tmp, output_file)
 
 
 def ssv_str(s: str) -> List[str]:
@@ -79,12 +87,15 @@ def main():
     parser.add_argument('-o', '--options', type=ssv_str,
                         help='Additional options to pass to mincresample as space-separated list, e.g.'
                              ' specify interpolation as -tricubic or -trilinear')
+    parser.add_argument('-n', '--no-binarize', dest='binarize', action='store_false',
+                        help='Skip extra step minccalc -expr A[0]>0.5, '
+                             'allowing for floating point values')
     parser.add_argument('input', type=str, help='input file')
     parser.add_argument('output', type=str, help='output file')
 
     options = parser.parse_args()
     try:
-        resample(options.input, options.output, options.divisions, options.verbose, options.options)
+        resample(options.input, options.output, options.divisions, options.binarize, options.verbose, options.options)
     except sp.CalledProcessError as e:
         sys.exit(e.returncode)
 
