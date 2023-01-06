@@ -1,4 +1,4 @@
-FROM docker.io/fnndsc/mni-conda-base:civet2.1.1-python3.11.0
+FROM docker.io/fnndsc/mni-conda-base:civet2.1.1-python3.10.6
 
 LABEL org.opencontainers.image.authors="FNNDSC <dev@babyMRI.org>" \
       org.opencontainers.image.title="ep-subdivide-mnc-methods" \
