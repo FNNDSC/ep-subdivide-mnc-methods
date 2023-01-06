@@ -3,6 +3,7 @@ import json
 import math
 import os
 import sys
+import time
 from argparse import ArgumentParser, Namespace, ArgumentDefaultsHelpFormatter
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -139,10 +140,13 @@ def _summarize(df: pd.DataFrame) -> dict:
 
 
 def _report_voldiff(other_path: Path) -> VolDiff:
+    start_ns = time.monotonic_ns()
     kron_path = _find_kroned_output(other_path)
     diff = voldiff_between(kron_path, other_path)
     report_path = other_path.with_name(other_path.name + '.diff.json')
     with report_path.open('w') as f:
         json.dump(diff, f, indent=2)
-    logger.info('counted voxel difference: {} -> {}', other_path, report_path)
+    end_ns = time.monotonic_ns()
+    elapsed = f'{(end_ns - start_ns) / 1e9:.1f}s'
+    logger.info('counted voxel difference: {} -> {} (took {})', other_path, report_path, elapsed)
     return diff
